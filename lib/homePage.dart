@@ -1,4 +1,4 @@
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -7,6 +7,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _formKey=GlobalKey<FormState>();
+  final Map<String,dynamic> loginFormData= {'email':null,'password':null};
+  final focusPassword =FocusNode();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -16,13 +24,116 @@ class _HomePageState extends State<HomePage> {
               painter: BgPainter(),
               child: new Container(),
           ),
-          new Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            verticalDirection: VerticalDirection.down,
-            children: <Widget>[
-              new SizedBox(height: MediaQuery.of(context).size.height*0.25,),
-              new Text("Welcome\nBack",textAlign: TextAlign.left,style: TextStyle(fontFamily:"Trebuchet",color: Colors.orangeAccent),),
-            ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0,0,230,0),
+            child: Center(
+              child: new Column(
+                children: <Widget>[
+                  new SizedBox(height: MediaQuery.of(context).size.height*0.23,),
+                  new Text("Welcome\nBack",textAlign: TextAlign.left,style: GoogleFonts.muli(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(40,360,40,0),
+            child: Form(
+              key:_formKey ,
+              child: SingleChildScrollView(
+                reverse: true,
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Flexible(
+                          child: new TextFormField(keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (v){
+                            FocusScope.of(context).requestFocus(focusPassword);
+                          },
+                          onSaved: (String value){
+                            loginFormData['email']=value;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            prefixIcon: Icon(Icons.email,color: Colors.black,),
+                              ),
+                            validator: (String value){
+                              if(!RegExp(
+                                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                                  .hasMatch(value)){
+                                return 'this is not a valid email';
+                              }else{return "";}
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.03,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Flexible(
+                          child: new TextFormField(obscureText: true,
+                            focusNode: focusPassword,
+                            onFieldSubmitted: (v){
+                              if(_formKey.currentState.validate())
+                              {
+                                _formKey.currentState.save();
+                              }
+                            },
+                            onSaved: (String value){
+                            loginFormData['password']=value;
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'Password',
+                              prefixIcon: Icon(Icons.lock,color: Colors.black,),
+                            ),
+                            validator: (String value){
+                              if(value.trim().isEmpty)
+                                {
+                                  return 'Password is required';
+                                }
+                              else{
+                                return "";
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height*0.08,
+                    ),
+                    Row(children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 240),
+                        child: Container(
+                          height: 75,
+                          width: 75,
+                          margin: EdgeInsets.only(bottom: 25),
+                          child: FittedBox(
+                            child: FloatingActionButton(
+                              splashColor: Color.fromRGBO(140,223,224,1.0),
+                              onPressed: (){
+                                if(_formKey.currentState.validate())
+                                  {
+                                    _formKey.currentState.save();
+                                  }
+                              },
+                              child: Icon(Icons.forward),
+                              backgroundColor: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                    )
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       )
