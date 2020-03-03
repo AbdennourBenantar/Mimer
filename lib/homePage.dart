@@ -30,13 +30,20 @@ class _HomePageState extends State<HomePage> {
               child: new Column(
                 children: <Widget>[
                   new SizedBox(height: MediaQuery.of(context).size.height*0.23,),
-                  new Text("Welcome\nBack",textAlign: TextAlign.left,style: GoogleFonts.muli(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold),),
+                  new Text("Welcome\nBack",textAlign: TextAlign.left,style: GoogleFonts.muli(fontSize: 30,color: Colors.white,fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 20.0,
+                      color: Colors.cyan,
+                      offset: Offset(2.0,1.0),
+                    ),
+                  ]),),
                 ],
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(40,360,40,0),
+            padding: const EdgeInsets.fromLTRB(40,320,40,0),
             child: Form(
               key:_formKey ,
               child: SingleChildScrollView(
@@ -107,8 +114,16 @@ class _HomePageState extends State<HomePage> {
                       height: MediaQuery.of(context).size.height*0.08,
                     ),
                     Row(children: <Widget>[
+                      Text("Sign in",style: GoogleFonts.muli(fontSize: 22,color: Colors.black,fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 30.0,
+                          color: Colors.white,
+                          offset: Offset(2.0,2.0),
+                        ),
+                      ]),),
                       Padding(
-                        padding: const EdgeInsets.only(left: 240),
+                        padding: const EdgeInsets.fromLTRB(170,10, 0 ,0),
                         child: Container(
                           height: 75,
                           width: 75,
@@ -129,6 +144,46 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ],
+                      mainAxisAlignment: MainAxisAlignment.start,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left:8.0),
+                          child: GestureDetector(
+                              child: Text("Sign up",
+                                style: GoogleFonts.dancingScript(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,shadows:[
+                                Shadow(
+                                  blurRadius: 50.0,
+                                  color: Colors.black,
+                                  offset: Offset(5.0,5.0),
+                                ),],),
+                              ),
+                              onTap: (){
+                                //TODO: implement :routing to Sign up page
+                              },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 120),
+                          child: GestureDetector(
+                            child: Text("Forgot password",
+                              style: GoogleFonts.dancingScript(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,shadows: [
+                                Shadow(
+                                  blurRadius: 50.0,
+                                  color: Colors.black,
+                                  offset: Offset(5.0,5.0),
+                                ),
+                              ]),
+                            ),
+                            onTap: (){
+                              //TODO: implement :routing to password reentering page
+                            },
+                          ),
+                        )
+
+                      ],
+                      mainAxisAlignment:MainAxisAlignment.start ,
                     )
                   ],
                 ),
