@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_vtc/homePage.dart';
+import 'package:my_vtc/signupPage.dart';
 
 class SplashScreenPage extends StatefulWidget{
   @override
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreenPage> with SingleTickerProvid
       Duration(seconds: 5),(){
         Navigator.pushReplacement(context,
             MaterialPageRoute(
-              builder: (context)=>HomePage(),
+              builder: (context)=>SignUpPage(),
             ));
     }
     );
