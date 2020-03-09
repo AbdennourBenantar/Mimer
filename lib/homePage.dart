@@ -61,6 +61,12 @@ class _HomePageState extends State<HomePage> {
                                         loginFormData['email']=value;
                                       },
                                       decoration: InputDecoration(
+                                        enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Color.fromRGBO(0,0,0,1))
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Color.fromRGBO(0,0,0,1))
+                                        ),
                                         hintText: 'Email',
                                         prefixIcon: Icon(Icons.email,color: Colors.black,),
                                       ),
@@ -93,6 +99,12 @@ class _HomePageState extends State<HomePage> {
                                         loginFormData['password']=value;
                                       },
                                       decoration: InputDecoration(
+                                        enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Color.fromRGBO(0,0,0,1))
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Color.fromRGBO(0,0,0,1))
+                                        ),
                                         hintText: 'Password',
                                         prefixIcon: Icon(Icons.lock,color: Colors.black,),
                                       ),
