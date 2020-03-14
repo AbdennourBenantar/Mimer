@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class FeedPage extends StatefulWidget {
   @override
@@ -9,18 +9,18 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPageState extends State<FeedPage> {
   GlobalKey _bottomNavigationBarKey=GlobalKey();
-  int selectedIndex=1;
+  int selectedIndex=2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       body: new Container(
         color: Color.fromRGBO(140,223,224,0.8),
-        child: ListView.builder(
+        child:selectedIndex==1?(ListView.builder(
           itemBuilder: (BuildContext context,int index){
             return PostCard();
           },
-        ),
+        )):(NewPost()),
       ),
       bottomNavigationBar: CurvedNavigationBar(
         height: 60,
@@ -28,6 +28,7 @@ class _FeedPageState extends State<FeedPage> {
         key: _bottomNavigationBarKey,
         items: <Widget>[
           Icon(Icons.person,size: 30,),
+          Icon(Icons.filter_none,size: 30,),
           Icon(Icons.add,size:30),
           Icon(Icons.star,size: 30,),
         ],
@@ -161,3 +162,28 @@ class _UserImage extends StatelessWidget {
     );
   }
 }
+class NewPost extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(5, 0, 5, 2),
+        child: Card(
+          child: Column(
+            children: <Widget>[_PostDetails(),_AddNew()],
+          ),
+        ),
+      ),
+    );
+
+  }
+}
+class _AddNew extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+    );
+  }
+}
+
