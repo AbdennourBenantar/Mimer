@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FeedPage extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _FeedPageState extends State<FeedPage> {
     return Scaffold(
 
       body: new Container(
+        color: Color.fromRGBO(140,223,224,0.8),
         child: ListView.builder(
           itemBuilder: (BuildContext context,int index){
             return PostCard();
@@ -21,6 +23,7 @@ class _FeedPageState extends State<FeedPage> {
         ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
+        height: 60,
         index: selectedIndex,
         key: _bottomNavigationBarKey,
         items: <Widget>[
@@ -45,10 +48,13 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 5/2,
-      child: Card(
-        child: Column(
-          children: <Widget>[_Post(),_PostDetails()],
+      aspectRatio: 0.8,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(5, 0, 5, 2),
+        child: Card(
+          child: Column(
+            children: <Widget>[_PostDetails(),_Post()],
+          ),
         ),
       ),
     );
@@ -60,31 +66,31 @@ class _Post extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 3,
-      child: Row(
-        children: <Widget>[_PostImage(),_PostTitleAndSummary()],
+      child: Column(
+        children: <Widget>[_PostTitle(),_PostImage()],
       ),
     );
   }
 }
-class _PostTitleAndSummary extends StatelessWidget {
-  const _PostTitleAndSummary({Key key}) : super(key: key);
+class _PostTitle extends StatelessWidget {
+  const _PostTitle({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final TextStyle titleTheme = Theme.of(context).textTheme.title;
-    final TextStyle summaryTheme = Theme.of(context).textTheme.body1;
     final String title = "This is a title";
-    final String summary = "This is summary";
 
     return Expanded(
-      flex: 3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Text(title, style: titleTheme),
-          Text(summary, style: summaryTheme),
-        ],
+      flex: 1,
+      child: Padding(
+        padding: const EdgeInsets.only(left:15.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text(title, style: titleTheme),
+          ],
+        ),
       ),
     );
   }
@@ -95,7 +101,15 @@ class _PostImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(flex: 2, child: Image.asset("assets/logo_transparent.png"));
+    return Expanded(flex: 7, child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Image.asset("assets/avatar.jpg",fit: BoxFit.contain,),
+        ),
+      ],
+    ));
   }
 }
 
@@ -105,24 +119,24 @@ class _PostDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: <Widget>[_UserImage(), _UserNameAndEmail()],
+      children: <Widget>[_UserImage(), _UserNameAndHashTags()],
     );
   }
 }
 
-class _UserNameAndEmail extends StatelessWidget {
-  const _UserNameAndEmail({Key key}) : super(key: key);
+class _UserNameAndHashTags extends StatelessWidget {
+  const _UserNameAndHashTags({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 7,
+      flex: 5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Abdenour"),
-          Text("mail@esi.dz"),
+          Text("Abdenour",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+          Text("#meme #Da7ka",style: TextStyle(fontSize: 9),),
         ],
       ),
     );
@@ -136,8 +150,13 @@ class _UserImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: CircleAvatar(
-        backgroundImage: AssetImage("assets/logo_transparent.png"),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: CircleAvatar(
+          radius: 17,
+          backgroundImage: AssetImage("assets/avatar.jpg",),
+          backgroundColor: Colors.transparent,
+        ),
       ),
     );
   }
